@@ -1,5 +1,5 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-  package="com.beritakita">
+  package="com.ahsailabs.beritakita_reactnative">
 
     <uses-permission android:name="android.permission.INTERNET" />
 

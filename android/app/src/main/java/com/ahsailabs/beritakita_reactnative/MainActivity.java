@@ -1,4 +1,4 @@
-package com.beritakita;
+package com.ahsailabs.beritakita_reactnative;
 
 import com.facebook.react.ReactActivity;
 
