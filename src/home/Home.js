@@ -22,12 +22,10 @@ import DetailsScreen from '../details/Details.js'
 import { ListItem, Avatar, Card } from 'react-native-elements';
 
 import useFetch from '../hook/usefetch.js'
-import { BackgroundImage } from 'react-native-elements/dist/config';
-
-
 
 function HomeScreen({navigation}) {
-
+  const [refreshing, setRefreshing] = React.useState(false)
+  
   let formData = new FormData();
   formData.append('groupcode', 'ABJAL1');
   formData.append('keyword', '');
@@ -43,11 +41,14 @@ function HomeScreen({navigation}) {
     },
     body: formData
   });
+  
 
   return (
     <SafeAreaView style={styles.container}>
-      {isLoading ? <ActivityIndicator size='large' style={styles.center}/> : (
+      {isLoading ? <ActivityIndicator color="#000" size="large" style={{ alignSelf: "center" }}/> : (
         <FlatList
+          refreshing={refreshing}
+          onRefresh={()=>{setRefreshing(false)}}
           data={response}
           keyExtractor={(_item, index) => _item.id}
           renderItem={({ item }) => (

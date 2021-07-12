@@ -1,4 +1,4 @@
-import * as React from 'react'
+import React from 'react'
 
 export default function useFetch(url, opts) {
     const [response, setResponse] = React.useState([])
@@ -7,12 +7,12 @@ export default function useFetch(url, opts) {
 
     React.useEffect(() => {
         setLoading(true)
-        console.log('start')
+        console.log('fetch start')
         fetch(url, opts)
           .then((response) => response.json())
           .then((json) => setResponse(json.data))
           .catch((e) => setError(e))
-          .finally(() => console.log('stop'), setLoading(false));
+          .finally(() => console.log('fetch stop'), setLoading(false));
       }, [url]);
     return [ response, isLoading, error ]
 }

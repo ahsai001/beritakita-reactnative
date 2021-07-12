@@ -4,50 +4,62 @@ import {
   Text, 
   Button,
   StyleSheet, 
-  useColorScheme  
+  Image,
+  StatusBar,
+  useColorScheme,
+  SafeAreaView 
 } from 'react-native';
+
+import useFetch from '../hook/usefetch.js'
 
 export default function DetailsScreen({navigation, route}) {
     const { itemId, otherParam } = route.params;
 
-    React.useEffect(()=>{
-        fetch('https://reactnative.dev/movies.json')
-        .then((response) => response.json())
-        .then((json) => {
-            console.log(json)
-        })
-        .catch((error) => {
-        console.error(error);
-        });
-    }, [])
+    const [response, isLoading, error] = useFetch('https://api.zaitunlabs.com/kango/cijou/news/detail/'+itemId, 
+    {
+        method: 'POST',
+        headers: {
+        'Accept': 'application/json; charset=UTF-8',
+        'Authorization': 'QVBJS0VZPXF3ZXJ0eTEyMzQ1Ng==',
+        'x-packagename': 'com.ahsailabs.beritakita_flutter',
+        'x-platform': "android"
+        }
+    });
+    
     return (
-        <View style={styles.center}>
-        <Text>Details Screen</Text>
-        <Text>itemId: {JSON.stringify(itemId)}</Text>
-        <Text>otherParam: {JSON.stringify(otherParam)}</Text>
-        <Button
-            title="Go to Details... again"
-            onPress={() =>
-            navigation.push('Details', {
-                itemId: Math.floor(Math.random() * 100),
-            })
-            }
-        />
-        <Button title="Go to Home" onPress={() => navigation.navigate('Home')} />
-        <Button title="Go back" onPress={() => navigation.goBack()} />
-        <Button
-            title="Go back to first screen in stack"
-            onPress={() => navigation.popToTop()}
-        />
+        <SafeAreaView style={styles.container}>
+        <View>
+        <Image
+            style={{width: '100%', height: 200}}
+            source={{uri: response.photo}}
+            resizeMode={'contain'} // cover or contain its upto you view look
+            />
+        <View style={styles.column_author_date}>
+            <Text>{response.created_by}</Text>
+            <Text>{response.created_at}</Text>
         </View>
+        <Text>{response.title}</Text>
+        <Text>{response.body}</Text>
+        </View>
+        </SafeAreaView>
     );
 }
 
 
 const styles = StyleSheet.create({
+    container: {
+        flex: 1,
+        marginTop: StatusBar.currentHeight || 0,
+      },
     center: {
         flex: 1,
         alignItems: 'center',
         justifyContent: 'center'
+    },
+    column_author_date: {
+        flexDirection: 'row',
+        marginBottom: 30,
+        alignItems: 'center',
+        justifyContent: 'space-between'
     }
 })
