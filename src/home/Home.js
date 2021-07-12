@@ -51,17 +51,16 @@ function HomeScreen({navigation}) {
           data={response}
           keyExtractor={(_item, index) => _item.id}
           renderItem={({ item }) => (
-            <TouchableOpacity>
-            <Card>
-              <Card.Image source={{uri: item.photo}} resizeMode='cover' style={styles.card_image}>
-                <ListItem style={styles.overlay_bottom}>
-                  <ListItem.Content style={{opacity: 0.3}}>
-                    <ListItem.Title style={{opacity: 0.3}}>{item.title}</ListItem.Title>
-                    <ListItem.Subtitle style={{opacity: 0.3}}>{item.summary}</ListItem.Subtitle>
-                  </ListItem.Content>
-                </ListItem>
-              </Card.Image>
-            </Card>
+            <TouchableOpacity onPress={()=>{navigation.navigate('Details', {itemId: item.id})}}>
+              <Card>
+                <Card.Image source={{uri: item.photo}} resizeMode='cover' style={styles.card_image}/>
+                  <ListItem style={styles.overlay_bottom}>
+                    <ListItem.Content>
+                      <ListItem.Title>{item.title}</ListItem.Title>
+                      <ListItem.Subtitle>{item.summary}</ListItem.Subtitle>
+                    </ListItem.Content>
+                  </ListItem>
+                </Card>
             </TouchableOpacity>
           )}
         />
@@ -95,11 +94,12 @@ export default function HomeNavigator({navigation}) {
     card_image: {
     },
     overlay_bottom: {
-      backgroundColor: '#998023',
       position: 'absolute',
-      left: 0,
+      right: 0,
       bottom: 0,
-      width: '100%',
-      opacity: 0
+      left: 0,
+      height: '50%',
+      backgroundColor: 'black',
+      opacity: 0.8
     }
   })
