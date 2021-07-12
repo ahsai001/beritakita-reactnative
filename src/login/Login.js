@@ -8,9 +8,9 @@ import {
 } from 'react-native';
 
 
-export function LoginScreen({navigation}){
+export default function LoginScreen({navigation}){
     return (
-        <View style={style.center}>
+        <View style={styles.center}>
         <Text>Login Screen</Text>
         <Button
           title="Go to Details"
@@ -26,7 +26,7 @@ export function LoginScreen({navigation}){
     )
 }
 
-const style = StyleSheet.create({
+const styles = StyleSheet.create({
     center: {
       flex: 1,
       alignItems: 'center',

@@ -6,9 +6,9 @@ import {
   StyleSheet, 
 } from 'react-native';
 
-export function LogoutScreen({navigation}){
+export default function LogoutScreen({navigation}){
     return (
-        <View style={style.center}>
+        <View style={styles.center}>
         <Text>Logout Screen</Text>
         <Button
           title="Go to Details"
@@ -24,7 +24,7 @@ export function LogoutScreen({navigation}){
     )
 }
 
-const style = StyleSheet.create({
+const styles = StyleSheet.create({
     center: {
       flex: 1,
       alignItems: 'center',

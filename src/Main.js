@@ -5,9 +5,9 @@ import {
 
 import { createDrawerNavigator } from '@react-navigation/drawer';
 
-import {HomeNavigator} from './home/Home.js'
-import {LoginScreen} from './login/Login.js'
-import {LogoutScreen} from './logout/Logout.js'
+import HomeNavigator from './home/Home.js'
+import LoginScreen from './login/Login.js'
+import LogoutScreen from './logout/Logout.js'
 
 const Drawer = createDrawerNavigator()
 
@@ -21,7 +21,7 @@ export function Main(){
     );
 }
 
-const style = StyleSheet.create({
+const styles = StyleSheet.create({
   center: {
     flex: 1,
     alignItems: 'center',

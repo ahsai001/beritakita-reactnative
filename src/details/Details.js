@@ -7,10 +7,21 @@ import {
   useColorScheme  
 } from 'react-native';
 
-export function DetailsScreen({navigation, route}) {
+export default function DetailsScreen({navigation, route}) {
     const { itemId, otherParam } = route.params;
+
+    React.useEffect(()=>{
+        fetch('https://reactnative.dev/movies.json')
+        .then((response) => response.json())
+        .then((json) => {
+            console.log(json)
+        })
+        .catch((error) => {
+        console.error(error);
+        });
+    }, [])
     return (
-        <View style={style.center}>
+        <View style={styles.center}>
         <Text>Details Screen</Text>
         <Text>itemId: {JSON.stringify(itemId)}</Text>
         <Text>otherParam: {JSON.stringify(otherParam)}</Text>
@@ -33,7 +44,7 @@ export function DetailsScreen({navigation, route}) {
 }
 
 
-const style = StyleSheet.create({
+const styles = StyleSheet.create({
     center: {
         flex: 1,
         alignItems: 'center',
