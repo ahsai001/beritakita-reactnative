@@ -40,7 +40,7 @@ function HomeScreen({navigation}) {
       'x-platform': "android"
     },
     body: formData
-  });
+  }, () => {});
   
 
   return (
@@ -54,7 +54,7 @@ function HomeScreen({navigation}) {
           renderItem={({ item }) => (
             <TouchableOpacity onPress={()=>{navigation.navigate('Details', {itemId: item.id})}}>
               <Card>
-                <Card.Image source={{uri: item.photo}} resizeMode='cover' style={styles.card_image}/>
+                <Card.Image source={{uri: item.photo, cache: "force-cache" }} resizeMode='cover' style={styles.card_image}/>
                   <ListItem style={styles.overlay_bottom}>
                     <ListItem.Content>
                       <ListItem.Title>{item.title}</ListItem.Title>
