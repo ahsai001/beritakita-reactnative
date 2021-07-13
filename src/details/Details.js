@@ -8,7 +8,7 @@ import {
   StatusBar,
   useColorScheme,
   SafeAreaView,
-  ScrollView
+  ScrollView,
 } from 'react-native';
 
 import useFetch from '../hook/usefetch.js'
@@ -25,7 +25,11 @@ export default function DetailsScreen({navigation, route}) {
         'x-packagename': 'com.ahsailabs.beritakita_flutter',
         'x-platform': "android"
         }
-    }, () => {Image.getSize(response.photo, (w, h) => {setAspectRatio(w/h)}, (e) =>{console.log(e)})});
+    }, (data) => {
+        Image.getSize(data.photo, (w, h) => {setAspectRatio(w/h)}, (e) =>{console.log(e)})
+        navigation.setOptions({ title: data.title })
+    });
+
     return (
         <SafeAreaView style={styles.container}>
         <ScrollView>

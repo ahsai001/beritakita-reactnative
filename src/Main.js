@@ -13,6 +13,10 @@ import {
   DrawerItem
 } from '@react-navigation/drawer';
 
+import {
+  getFocusedRouteNameFromRoute
+} from '@react-navigation/native'
+
 function CustomDrawerContent(props) {
 
   const toggleDrawer = () => {
@@ -60,7 +64,14 @@ const Drawer = createDrawerNavigator()
 export function Main(){
     return (
         <Drawer.Navigator initialRouteName="Home" drawerContent={(props) => <CustomDrawerContent {...props}/>}>
-          <Drawer.Screen name="Home" component={HomeNavigator} options={{ title: 'Home Navigator' }}/>
+          <Drawer.Screen name="Home" component={HomeNavigator} 
+          options={
+              ({ route }) => {
+                const routeName = getFocusedRouteNameFromRoute(route) ?? 'Home'
+                if (routeName != "Home")
+                    return ({swipeEnabled: false, title: 'Home Navigator'})
+              }
+            }/>
           <Drawer.Screen name="Login" component={LoginScreen} options={{ title: 'Login Page' }}/>
         </Drawer.Navigator>
     );

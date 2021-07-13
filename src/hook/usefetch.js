@@ -10,9 +10,9 @@ export default function useFetch(url, opts, callback) {
         console.log('fetch start')
         fetch(url, opts)
           .then((response) => response.json())
-          .then((json) => setResponse(json.data))
+          .then((json) => {setResponse(json.data); callback(json.data)})
           .catch((e) => setError(e))
-          .finally(() => console.log('fetch stop'), setLoading(false), callback());
+          .finally(() => console.log('fetch stop'), setLoading(false));
       }, [url]);
     return [ response, isLoading, error ]
 }

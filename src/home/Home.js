@@ -40,7 +40,7 @@ function HomeScreen({navigation}) {
       'x-platform': "android"
     },
     body: formData
-  }, () => {});
+  }, (data) => {});
   
 
   return (
