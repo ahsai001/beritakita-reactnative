@@ -85,7 +85,7 @@ export default function HomeNavigator({navigation}) {
   const styles = StyleSheet.create({
     container: {
       flex: 1,
-      marginTop: StatusBar.currentHeight || 0,
+      //marginTop: StatusBar.currentHeight || 0,
     },
     center: {
       flex: 1,

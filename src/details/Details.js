@@ -7,15 +7,15 @@ import {
   Image,
   StatusBar,
   useColorScheme,
-  SafeAreaView 
+  SafeAreaView,
+  ScrollView
 } from 'react-native';
 
 import useFetch from '../hook/usefetch.js'
 
 export default function DetailsScreen({navigation, route}) {
     const { itemId, otherParam } = route.params;
-    const [width, setWidth] = React.useState(1);
-    const [height, setHeight] = React.useState(1);
+    const [aspectRatio, setAspectRatio] = React.useState(1.0);
     const [response, isLoading, error] = useFetch('https://api.zaitunlabs.com/kango/cijou/news/detail/'+itemId, 
     {
         method: 'POST',
@@ -25,12 +25,12 @@ export default function DetailsScreen({navigation, route}) {
         'x-packagename': 'com.ahsailabs.beritakita_flutter',
         'x-platform': "android"
         }
-    }, () => {Image.getSize(response.photo, (w, h) => {setWidth(w), setHeight(h)}, (e) =>{console.log(e)})});
+    }, () => {Image.getSize(response.photo, (w, h) => {setAspectRatio(w/h)}, (e) =>{console.log(e)})});
     return (
         <SafeAreaView style={styles.container}>
-        <View style={{padding: 10}}>
+        <ScrollView>
         <Image
-            style={{width: '100%', height: undefined, aspectRatio: width/height}}
+            style={{width: '100%', height: undefined, aspectRatio: aspectRatio}}
             source={{uri: response.photo, cache: "force-cache" }}
             resizeMode={'contain'} // cover or contain its upto you view look
             />
@@ -40,7 +40,7 @@ export default function DetailsScreen({navigation, route}) {
         </View>
         <Text>{response.title}</Text>
         <Text>{response.body}</Text>
-        </View>
+        </ScrollView>
         </SafeAreaView>
     );
 }
@@ -49,7 +49,7 @@ export default function DetailsScreen({navigation, route}) {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        marginTop: StatusBar.currentHeight || 0,
+        padding: 10
       },
     center: {
         flex: 1,
