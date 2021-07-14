@@ -6,6 +6,7 @@ export default function useFetch(url, opts, callback) {
     const [error, setError] = React.useState(null)
 
     React.useEffect(() => {
+        //side effect logic
         setLoading(true)
         console.log('fetch start')
         fetch(url, opts)
@@ -13,6 +14,8 @@ export default function useFetch(url, opts, callback) {
           .then((json) => {setResponse(json.data); callback(json.data)})
           .catch((e) => setError(e))
           .finally(() => console.log('fetch stop'), setLoading(false));
+
+        return () => {} //clean up logic
       }, [url]);
     return [ response, isLoading, error ]
 }
