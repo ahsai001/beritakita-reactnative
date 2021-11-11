@@ -9,6 +9,7 @@ import {
   useColorScheme,
   SafeAreaView,
   ScrollView,
+  ActivityIndicator,
 } from 'react-native';
 
 import useFetch from '../hook/usefetch.js';
@@ -43,19 +44,27 @@ export default function DetailsScreen({navigation, route}) {
 
   return (
     <SafeAreaView style={styles.container}>
-      <ScrollView>
-        <Image
-          style={{width: '100%', height: undefined, aspectRatio: aspectRatio}}
-          source={{uri: response.photo, cache: 'force-cache'}}
-          resizeMode={'contain'} // cover or contain its upto you view look
+      {isLoading ? (
+        <ActivityIndicator
+          color="#000"
+          size="large"
+          style={{alignSelf: 'center'}}
         />
-        <View style={styles.column_author_date}>
-          <Text>{response.created_by}</Text>
-          <Text>{response.created_at}</Text>
-        </View>
-        <Text>{response.title}</Text>
-        <Text>{response.body}</Text>
-      </ScrollView>
+      ) : (
+        <ScrollView>
+          <Image
+            style={{width: '100%', height: undefined, aspectRatio: aspectRatio}}
+            source={{uri: response.photo, cache: 'force-cache'}}
+            resizeMode={'contain'} // cover or contain its upto you view look
+          />
+          <View style={styles.column_author_date}>
+            <Text>{response.created_by}</Text>
+            <Text>{response.created_at}</Text>
+          </View>
+          <Text>{response.title}</Text>
+          <Text>{response.body}</Text>
+        </ScrollView>
+      )}
     </SafeAreaView>
   );
 }
