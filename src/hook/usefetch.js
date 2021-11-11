@@ -1,7 +1,7 @@
 import React from 'react';
 
 export default function useFetch(url, opts, callback) {
-  const [response, setResponse] = React.useState([]);
+  const [output, setOutput] = React.useState([]);
   const [isLoading, setLoading] = React.useState(false);
   const [error, setError] = React.useState(null);
 
@@ -12,7 +12,7 @@ export default function useFetch(url, opts, callback) {
     fetch(url, opts)
       .then(response => response.json())
       .then(json => {
-        setResponse(json.data);
+        setOutput(json.data);
         callback(json.data);
       })
       .catch(e => setError(e))
@@ -20,5 +20,5 @@ export default function useFetch(url, opts, callback) {
 
     return () => {}; //clean up logic
   }, [url]);
-  return [response, isLoading, error];
+  return [output, isLoading, error];
 }
