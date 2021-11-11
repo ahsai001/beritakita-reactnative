@@ -1,10 +1,7 @@
 import * as React from 'react';
-import { 
-  NavigationContainer, 
-  DefaultTheme,
-} from '@react-navigation/native';
+import {NavigationContainer, DefaultTheme} from '@react-navigation/native';
 
-import {Main} from './src/Main.js'
+import {Main} from './src/Main.js';
 
 //fully custom themes
 // const MyTheme = {
@@ -25,15 +22,15 @@ const MyTheme = {
     ...DefaultTheme.colors,
     primary: 'rgb(255, 45, 85)',
     card: 'white',
-    text: 'orange'
+    text: 'orange',
   },
 };
 
 function App() {
   return (
-      <NavigationContainer theme={MyTheme}>
-        <Main/>
-      </NavigationContainer>
+    <NavigationContainer theme={MyTheme}>
+      <Main />
+    </NavigationContainer>
   );
 }
 
